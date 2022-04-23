@@ -1,0 +1,89 @@
+
+@import "../../styles.scss";
+
+mat-table {
+  width: 100vw;
+  min-width: 3vw !important;
+  max-width: 70vw;
+  height: 50vh;
+  min-height: 10vh !important;
+  max-height: 50vh;
+  // max-height: 500px ;
+  // width: 100%;
+}
+
+$pR: 2%;
+$pL: 3%;
+$minCellwidth: 5%;
+$maxCellwidth: 19%;
+
+.border {
+  @extend .centerAlign;
+  border-right: 1px solid currentColor;
+  padding-right: $pR;
+  width: $minCellwidth;
+}
+.contentCell {
+  width: $maxCellwidth;
+  word-break: break-all;
+  padding-left: $pL;
+  text-align: left;
+}
+
+.mat-header-row {
+  background-color: #7044bf;
+  @exten .centerAlign;
+
+  .mat-header-cell {
+    font-size: 16px;
+    color: whitesmoke;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-style: normal;
+    word-spacing: 0.1rem;
+  }
+}
+
+.icoButtons {
+  i {
+    margin-right: 10%;
+    font-size: 1.5em;
+  }
+  i:last-child {
+    margin-right: 0;
+  }
+}
+
+.mat-column-selector {
+  @extend .border;
+  @extend .noPadding;
+}
+.mat-column-id {
+  @extend .border;
+  @extend .noPadding;
+}
+
+.mat-column-name {
+  @extend .border;
+  @extend .contentCell;
+  // font-size: 18px;
+}
+
+.mat-column-description {
+  @extend .border;
+  @extend .contentCell;
+  font-style: italic;
+}
+
+.mat-column-webReference {
+  @extend .border;
+  @extend .contentCell;
+  text-align: center;
+  font-weight: bold;
+}
+
+.mat-column-action {
+  @extend .centerAlign;
+  @extend .noPadding;
+  width: 10%;
+}

@@ -1,6 +1,6 @@
 {
   "name": "design-assignment-koru",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,12 +9,18 @@
     "test": "ng test"
   },
   "private": true,
+  "engines": {
+    "node": "16.13.0",
+    "npm": "8.7.0"
+  },
   "dependencies": {
     "@angular/animations": "~13.1.0",
+    "@angular/cdk": "^13.3.4",
     "@angular/common": "~13.1.0",
     "@angular/compiler": "~13.1.0",
     "@angular/core": "~13.1.0",
     "@angular/forms": "~13.1.0",
+    "@angular/material": "^13.3.4",
     "@angular/platform-browser": "~13.1.0",
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
@@ -35,5 +41,18 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.5.2"
-  }
+  },
+  "author": "Santanu Dash <skdash505@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skdash505/Design-Assignment-Koru.git"
+  },
+  "keywords": [
+    "angular",
+    "bootstrap",
+    "angularMaterial",
+    "authentication",
+    "mean Stack"
+  ]
 }
