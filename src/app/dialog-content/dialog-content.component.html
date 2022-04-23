@@ -1,13 +1,38 @@
 <div class="mat-elevation-z8">
-  <mat-table table [dataSource]="dataList">
+  <mat-form-field appearance="standard" class="filterBox">
+    <input
+    matInput
+    [(ngModel)]="filterValue"
+      (keyup)="applyFilter($event)"
+      placeholder="Filter Data"
+      #input
+    />
+    <mat-icon *ngIf="!input.value" matSuffix>search</mat-icon>
+    <button mat-button *ngIf="input.value" matSuffix mat-icon-button (click)="clearFilter($event)" >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-table
+    table
+    [dataSource]="dataListPaginated"
+    matSort
+    (matSortChange)="announceSortChange($event)"
+  >
     <!-- <mat-text-column name="score"></mat-text-column> -->
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
     <!-- Selector Column -->
     <ng-container matColumnDef="selector">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (change)="onSelectAll($event)"> </mat-checkbox>
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-headerc
+        sortActionDescription
+      >
+        <mat-checkbox [checked]="selectAllRow" (change)="onSelectAll($event)">
+        </mat-checkbox>
       </th>
       <td mat-cell *matCellDef="let element">
         <mat-checkbox
@@ -19,25 +44,25 @@
 
     <!-- Id Column -->
     <!-- <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> id </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container> -->
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
     <!-- Description Column -->
     <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
       <td mat-cell *matCellDef="let element">{{ element.description }}</td>
     </ng-container>
 
     <!-- WebReferance Column -->
     <ng-container matColumnDef="webReference">
-      <th mat-header-cell *matHeaderCellDef>WebReference</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>WebReference</th>
       <td mat-cell *matCellDef="let element">{{ element.webReference }}</td>
     </ng-container>
 
@@ -45,56 +70,72 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>
         <span class="icoButtons">
-          <i
+          <!-- <i
             (click)="addRow($event)"
             class="fa-solid fa-square-plus fa-2x"
             aria-hidden="true"
             style="color: rgb(33 235 142 / 88%)"
           ></i>
-
           <i
             (click)="deleteSelectedRow($event)"
             class="fa-solid fa-trash-arrow-up fa-2x"
             aria-hidden="true"
             style="color: rgb(255 69 69)"
-          ></i>
+          ></i> -->
+
+          <mat-icon (click)="addRow($event)" aria-hidden="true" aria-label="Open" style="color: rgb(33 235 142 / 88%)">add</mat-icon>
+          <mat-icon (click)="deleteSelectedRow($event)" aria-hidden="true" aria-label="Open" style="color: rgb(255 69 69)">delete_forever</mat-icon>
         </span>
+        
       </th>
       <td mat-cell *matCellDef="let element">
         <span class="icoButtons">
-          <i
+          <!-- <i
             (click)="editRow($event, element)"
             class="fa-solid fa-pen-to-square fa-2x"
             aria-hidden="true"
             style="color: rgba(74, 80, 190, 0.88)"
           ></i>
-
           <i
             (click)="deleteRow($event, element)"
             class="fa-solid fa-trash fa-2x"
             aria-hidden="true"
             style="color: indianred"
-          ></i>
+          ></i> -->
+          
+          <mat-icon (click)="editRow($event, element)" aria-hidden="true" aria-label="Open" style="color: rgba(74, 80, 190, 0.88)">edit</mat-icon>
+          <mat-icon (click)="deleteRow($event, element)" aria-hidden="true" aria-label="Open" style="color: indianred">delete</mat-icon>
+        
         </span>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row 
-    (click)="clickedRows.add(row)"
-    [class.demo-row-is-clicked]="clickedRows.has(row)"
-    *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="clickedRows.add(row)"
+      [class.demo-row-is-clicked]="clickedRows.has(row)"
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="5">
+        No data found with the filter "{{ input.value }}"
+      </td>
+    </tr>
   </mat-table>
 
   <mat-paginator
-    [pageSizeOptions]="[5, 10, 20]"
+    [length]="dataList.length"
+    [pageSize]="selectedPageSize"
+    [pageSizeOptions]="pageSizeOption"
     showFirstLastButtons
-    aria-label="Select page of periodic elements"
+    aria-label="Select page of Data"
   >
   </mat-paginator>
 </div>
 
-<div>
+<!-- Log Selected Rows -->
+<!-- <div>
   <h3>
     Click Log
   </h3>
@@ -108,4 +149,4 @@
   <li *ngFor="let clickedRow of clickedRows">
     Clicked on {{clickedRow.name}}
   </li>
-</ul>
+</ul> -->

@@ -20,6 +20,18 @@ body {
   height: 300px;
 }
 
+// Mat Dialog content size Start
+.mat-dialog-container-Data {
+  width: 100vw !important;
+  min-width: 3vw !important;
+  max-width: 70vw !important;
+  height: auto !important;
+  min-height: 10vh !important;
+  max-height: 110vh !important;
+}
+// Mat Dialog content size End
+
+// conmmon classes defined Start
 .centerAlign {
   align-items: center;
   justify-content: center;
@@ -30,3 +42,4 @@ body {
 .noPadding {
   padding: 0 0 0 0 !important;
 }
+// conmmon classes defined End
