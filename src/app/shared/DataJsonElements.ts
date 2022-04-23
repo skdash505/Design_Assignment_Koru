@@ -1,7 +1,7 @@
 
 export interface DataJsonElement {
     selector: boolean;
-    id: number;
+    id: number | string;
     name: string;
     description: string;
     webReference: string;

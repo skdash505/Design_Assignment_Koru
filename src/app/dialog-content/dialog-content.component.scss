@@ -31,9 +31,9 @@ $pL: 3%;
 $minCellwidth: 5%;
 $maxCellwidth: 19%;
 $iconCellWidth: 10%;
-$minBlankCellwidth: 3.2%;
-$maxBlankCellwidth: 12%;
-$iconBlankCellWidth: 6.4%;
+// $minBlankCellwidth: 3.2%;
+// $maxBlankCellwidth: 12%;
+// $iconBlankCellWidth: 6.4%;
 // Variables Defined End
 
 // conmmon classes defined Start
@@ -63,17 +63,17 @@ $iconBlankCellWidth: 6.4%;
     font-style: normal;
     word-spacing: 0.1rem;
   }
-  .cdk-column-selector.mat-column-selector {
-    width: $minBlankCellwidth;
-  }
-  .cdk-column-name.mat-column-name,
-  .cdk-column-description.mat-column-description,
-  .cdk-column-webReference.mat-column-webReference {
-    width: $maxBlankCellwidth;
-  }
-  .cdk-column-action.mat-column-action {
-    width: $iconBlankCellWidth;
-  }
+  // .cdk-column-selector.mat-column-selector {
+  //   width: $minBlankCellwidth;
+  // }
+  // .cdk-column-name.mat-column-name,
+  // .cdk-column-description.mat-column-description,
+  // .cdk-column-webReference.mat-column-webReference {
+  //   width: $maxBlankCellwidth;
+  // }
+  // .cdk-column-action.mat-column-action {
+  //   width: $iconBlankCellWidth;
+  // }
 }
 // MatTable header defined End
 

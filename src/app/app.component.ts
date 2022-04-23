@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
-import { DataJsonElement } from './DataJsonElements';
+import { DataJsonElement } from './shared/DataJsonElements';
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
-import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -35,13 +34,23 @@ export class AppComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.data = this.dataList;
-    
+
     // open MatDialogBox
     const dialogRef = await this.dialog.open(DialogContentComponent, dialogConfig);
-    
+
     // after MatDialogBox closed
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    let DialogReasult: DataJsonElement = {
+      name: "",
+      description: "",
+      webReference: "",
+      selector: false,
+      id: 0
+    };
+    await dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog result: ", result);
+      // console.log(`Dialog result: ${result}`);
+      DialogReasult = result.data.data;
     });
+    return DialogReasult;
   }
 }

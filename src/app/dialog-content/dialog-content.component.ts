@@ -4,28 +4,26 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
-import { DataJsonElement } from '../DataJsonElements';
+import { DataFormComponent } from '../data-form/data-form.component';
+import { DataJsonElement } from '../shared/DataJsonElements';
 
 @Component({
   selector: 'app-dialog-content',
   templateUrl: './dialog-content.component.html',
   styleUrls: ['./dialog-content.component.scss']
 })
-export class DialogContentComponent implements OnInit {
+export class DialogContentComponent implements OnInit, AfterViewInit {
 
   // Basic Table
   displayedColumns: string[] = ['selector', 'name', 'description', 'webReference', 'action'];
   dataListPaginated!: MatTableDataSource<DataJsonElement>;
   dataList!: DataJsonElement[];
 
-  // highlight selectedRow
-  clickedRows = new Set<DataJsonElement>();
-  selectAllRow: boolean = false;
-
 
   constructor(
+    public dialog: MatDialog,
     private dialogRef: MatDialogRef<DialogContentComponent>,
     private _liveAnnouncer: LiveAnnouncer,
     @Inject(MAT_DIALOG_DATA) data: DataJsonElement[]
@@ -60,6 +58,39 @@ export class DialogContentComponent implements OnInit {
     }
   }
 
+  // Filter Functionality
+  filterValue!: string;
+  applyFilter(event: any) {
+    // const filterValue = (event.target as HTMLInputElement).value;
+    this.dataListPaginated.filter = this.filterValue.trim().toLowerCase();
+    this.consoleAllData("applyFilter")
+  }
+  clearFilter(event: any) {
+    this.filterValue = "";
+    this.applyFilter(event);
+  }
+
+  // Set Data to DataList from Parent Screen
+  setDataList(data: DataJsonElement[]) {
+    this.dataList = [...data];
+    this.dataList.forEach(element => {
+      element.selector = false;
+      if (!Boolean(element.id)) {
+        element.id = Math.random().toString(36).substring(2) +
+          (new Date()).getTime().toString(36);
+      }
+    });
+    this.updatePaginationDataList(this.dataList);
+    this.consoleAllData("setDataList");
+  }
+
+  // Set Updated Data to Paginated DataList 
+  updatePaginationDataList(updatedDataList: DataJsonElement[]) {
+    this.dataListPaginated = new MatTableDataSource<DataJsonElement>([...updatedDataList]);
+    this.dataListPaginated.paginator = this.paginator;
+    this.dataListPaginated.sort = this.sort;
+  }
+
   consoleAllData(From: string) {
     console.log("Start by : ", From);
     console.log("selectAllRow : ", this.selectAllRow);
@@ -72,35 +103,64 @@ export class DialogContentComponent implements OnInit {
     console.log("End >>>>");
   }
 
-  // Set Data to DataList from Parent Screen
-  setDataList(data: DataJsonElement[]) {
-    this.dataList = data;
-    this.dataList.forEach(element => {
-      element.selector = false;
-    });
-    this.updatePaginationDataList(this.dataList);
-    this.consoleAllData("setDataList");
-  }
 
-  // Set Updated Data to Paginated DataList 
-  updatePaginationDataList(updatedDataList: DataJsonElement[]) {
-    this.dataListPaginated = new MatTableDataSource<DataJsonElement>(updatedDataList);
-    this.dataListPaginated.paginator = this.paginator;
-    this.dataListPaginated.sort = this.sort;
-  }
 
   // Add new Row
-  isAddEditRow: boolean = false;
-  addRow(event: any) {
+  async addRow(event: any) {
+    await this.openFormDialog(true);
     this.consoleAllData("addRow");
   }
 
   // Edit row details
-  editRow(event: any, row: DataJsonElement) {
+  async editRow(event: any, row: DataJsonElement) {
+    await this.openFormDialog(false, row);
     this.consoleAllData("editRow");
   }
 
+  async openFormDialog(buttonShow: boolean, rowData?: DataJsonElement) {
+    // define some parameter for MatDialogBox
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      rowData: rowData,
+      buttonShow: buttonShow
+    };
 
+    // open MatDialogBox
+    const dialogRef = await this.dialog.open(DataFormComponent, dialogConfig);
+
+    // after MatDialogBox closed
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog result: ", result);
+
+      if (Boolean(result) && Boolean(result!.data!.data)) {
+        this.dataList.push(result.data.data);
+        this.setDataList(this.dataList);
+      }
+      this.consoleAllData("addRow");
+    });
+
+    // // after MatDialogBox closed
+    // let DialogReasult: DataJsonElement = {
+    //   name: "",
+    //   description: "",
+    //   webReference: "",
+    //   selector: false,
+    //   id: 0
+    // };
+    // await dialogRef.afterClosed().subscribe(result => {
+    //   console.log("Dialog result: ", result);
+    //   // console.log(`Dialog result: ${result}`);
+    //   DialogReasult = result.data.data;
+    // });
+    // return DialogReasult;
+  }
+
+  /////// Custom Selector Start /////
+
+  // highlight selectedRow
+  clickedRows = new Set<DataJsonElement>();
+  selectAllRow: boolean = false;
 
   // on click on select all checkbox
   onSelectAll(event: any) {
@@ -121,6 +181,9 @@ export class DialogContentComponent implements OnInit {
     this.consoleAllData("onSelecter");
   }
 
+  /////// Custom Selector End /////
+
+
   // Delete Selected Rows
   deleteSelectedRow(event: any) {
 
@@ -130,7 +193,7 @@ export class DialogContentComponent implements OnInit {
         indexList.push(index);
       }
     }
-    
+
     if (Boolean(indexList.length)) {
       if (!this.selectAllRow) {
         indexList.reverse();
@@ -151,6 +214,7 @@ export class DialogContentComponent implements OnInit {
     }
   }
 
+  /////// Custom Selector End /////
   // Delete only one row
   deleteRow(event: any, row: DataJsonElement) {
     for (let index = 0; index < this.dataList.length; index++) {
@@ -166,16 +230,5 @@ export class DialogContentComponent implements OnInit {
     }
   }
 
-  // Filter Functionality
-  filterValue!: string;
-  applyFilter(event: any) {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    this.dataListPaginated.filter = this.filterValue.trim().toLowerCase();
-    this.consoleAllData("applyFilter")
-  }
-  clearFilter(event: any) {
-    this.filterValue = "";
-    this.applyFilter(event);
-  }
 
 }
