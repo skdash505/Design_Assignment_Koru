@@ -2,18 +2,20 @@
 
 ## FrameWork Used
 Angular version _13.1.2_. for base and AngularMaterial version 13.3.4 is used for material design.
+
 SCSS is used instade of CSS as a CSS preProcessor.
 
 ## Assumptions
 HttpClient is used to fetch the data of Data.json in future it will be replaced by API to fetch data.
+
 MatIcon is used to avoid external dependencies on other sources.
 
-in Table delete selected button on header is used to delete selected rows.
+In Table delete selected button on header is used to delete selected rows.
 
 ## To Run
 Required **NodeJS _16.13.0_, npm _8.7.0_, angularCLI _13.1.2_**.
 >for the first run do a npm install.
-the proceed with below instruction.
+>then proceed with below instruction.
 
 ## Development server
 
