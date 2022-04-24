@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // Fect all data from Json File
-    this.httpClient.get<{ data: DataJsonElement[] }>("assets/data.json").subscribe(data => {
+    this.httpClient.get<{ data: DataJsonElement[] }>("assets/source/data.json").subscribe(data => {
       console.log(data.data);
       this.dataList = data.data;
     })
