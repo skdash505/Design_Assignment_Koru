@@ -36,6 +36,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 
 const materialModules = [
@@ -74,7 +75,7 @@ const materialModules = [
   MatDatepickerModule,
   MatTooltipModule,
 
-  MatDialogModule
+  MatDialogModule,
 ];
 
 @NgModule({
@@ -85,6 +86,8 @@ const materialModules = [
   exports: [
     ...materialModules
   ],
+  providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}}]
 })
 
 export class AngularMaterialModule { }

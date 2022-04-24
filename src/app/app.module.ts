@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Angular material module
 import { AngularMaterialModule} from './angularMaterial/angular-material.module';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 
 import { AppComponent } from './app.component';
@@ -33,7 +34,9 @@ import { DataFormComponent } from './data-form/data-form.component';
 
     AngularMaterialModule,
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}}
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -1,50 +1,82 @@
 <mat-card class="box">
+  <mat-card-title class="header" *ngIf="Title">{{ Title }}</mat-card-title>
+  <!--   
   <mat-card-header class="header" *ngIf="Title">
     <mat-card-title>{{ Title }}</mat-card-title>
-  </mat-card-header>
+  </mat-card-header> -->
 
   <form [formGroup]="dataForm" (ngSubmit)="onSubmit($event)">
     <mat-card-content>
       <!-- Name Field -->
-      <mat-form-field appearance="fill">
+      <mat-form-field
+        appearance="fill"
+        [hideRequiredMarker]="hideRequiredControl.value"
+        [floatLabel]="floatLabelControl.value"
+      >
         <mat-label>Name</mat-label>
-        <input
+        <input #input
           matInput
-          placeholder="name"
+          placeholder="Name"
           formControlName="name"
           [(ngModel)]="selectedData.name"
           required
         />
-        <!-- <mat-error *ngIf="dataForm.name.touched && dataForm.name.hasError('required')">Name is Required</mat-error>
-        <mat-error *ngIf="dataForm.name.hasError('required')">Please enter alphabatic "Name".</mat-error> -->
+        <!-- <mat-hint align="start">Min {{dataFormparams.get("name").minlength}} and Max {{dataFormparams.get("name").maxlength}} Characters</mat-hint>
+        <mat-hint align="end">{{ input.value?.length || 0 }}/{{dataFormparams.get("name").maxlength}}</mat-hint>
+
+        <mat-error *ngIf="dataForm.get('name')!.touched && dataForm.get('name')!.hasError('required')">Name is Required</mat-error>
+        <mat-error *ngIf="dataForm.get('name')!.hasError('minlength')">"Name" mustbe {{dataFormparams.get("name").minlength}} or higher.</mat-error>
+        <mat-error *ngIf="dataForm.get('name')!.hasError('maxlength')">"Name" mustbe {{dataFormparams.get("name").maxlength}} or lower.</mat-error>
+        <mat-error *ngIf="dataForm.get('name')!.hasError('pattern')">Please enter alphabatic "Name".</mat-error> -->
 
         <!-- Description Field -->
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field
+        appearance="fill"
+        [hideRequiredMarker]="hideRequiredControl.value"
+        [floatLabel]="floatLabelControl.value"
+      >
         <mat-label>Description</mat-label>
         <input
           matInput
-          placeholder="description"
+          placeholder="Description"
           formControlName="description"
           [(ngModel)]="selectedData.description"
           required
         />
-        <!-- <mat-error *ngIf="dataForm.description.touched && dataForm.description.hasError('required')">Description is Required</mat-error>
-        <mat-error *ngIf="dataForm.description.hasError('required')">Please enter alphanumeric "Description".</mat-error> -->
+        
+        <!-- <mat-hint align="start">Min {{dataFormparams.get("description").minlength}} and Max {{dataFormparams.get("name").maxlength}} Characters</mat-hint>
+        <mat-hint align="end">{{ input.value?.length || 0 }}/{{dataFormparams.get("name").maxlength}}</mat-hint>
+
+        <mat-error *ngIf="dataForm.get('description')!.touched && dataForm.get('description')!.hasError('required')">Description is Required</mat-error>
+        <mat-error *ngIf="dataForm.get('description')!.hasError('minlength')">"Description" mustbe {{dataFormparams.get("description").minlength}} or higher.</mat-error>
+        <mat-error *ngIf="dataForm.get('description')!.hasError('maxlength')">"Description" mustbe {{dataFormparams.get("name").maxlength}} or lower.</mat-error>
+        <mat-error *ngIf="dataForm.get('description')!.hasError('pattern')">Please enter alphanumeric "Description.</mat-error> -->
 
         <!-- WebReference Field -->
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field
+        appearance="fill"
+        [hideRequiredMarker]="hideRequiredControl.value"
+        [floatLabel]="floatLabelControl.value"
+      >
         <mat-label>WebReference</mat-label>
         <input
           matInput
-          placeholder="webReference"
+          placeholder="WebReference"
+          required
           formControlName="webReference"
           [(ngModel)]="selectedData.webReference"
-          required
         />
-        <!-- <mat-error *ngIf="dataForm.webReference.touched && dataForm.webReference.hasError('required')">WebReference is Required</mat-error>
-        <mat-error *ngIf="dataForm.webReference.hasError('required')">Please enter alphanumeric "WebReference".</mat-error> -->
+        
+        <!-- <mat-hint align="start">Min {{dataFormparams.get("webReference").minlength}} and Max {{dataFormparams.get("webReference").maxlength}} Characters</mat-hint>
+        <mat-hint align="end">{{ input.value?.length || 0 }}/{{dataFormparams.get("webReference").maxlength}}</mat-hint>
+
+        <mat-error *ngIf="dataForm.get('webReference')!.touched && dataForm.get('webReference')!.hasError('required')">WebReference is Required</mat-error>
+        <mat-error *ngIf="dataForm.get('webReference')!.hasError('minlength')">"WebReference" mustbe {{dataFormparams.get("webReference").minlength}} or higher.</mat-error>
+        <mat-error *ngIf="dataForm.get('webReference')!.hasError('maxlength')">"WebReference" mustbe {{dataFormparams.get("webReference").maxlength}} or lower.</mat-error>
+        <mat-error *ngIf="dataForm.get('webReference')!.hasError('pattern')">Please enter alphanumeric "WebReference.</mat-error> -->
+        
       </mat-form-field>
     </mat-card-content>
 
