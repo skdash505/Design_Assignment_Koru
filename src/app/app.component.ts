@@ -11,7 +11,7 @@ import { DialogContentComponent } from './dialog-content/dialog-content.componen
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Design_Assignment_Koru';
+  title = 'Paginated_Grid_Example';
   buttonTitle: string = 'Show Data';
   dataList!: DataJsonElement[];
 

@@ -1,4 +1,4 @@
-# DesignAssignmentKoru
+# Paginated Grid Example
 
 ## FrameWork Used
 Angular version _13.1.2_. for base and AngularMaterial version 13.3.4 is used for material design.

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Design_Assignment_Koru": {
+    "Paginated_Grid_Example": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/design-assignment-koru",
+            "outputPath": "dist/paginated-grid-example",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Design_Assignment_Koru:build:production"
+              "browserTarget": "Paginated_Grid_Example:build:production"
             },
             "development": {
-              "browserTarget": "Design_Assignment_Koru:build:development"
+              "browserTarget": "Paginated_Grid_Example:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Design_Assignment_Koru:build"
+            "browserTarget": "Paginated_Grid_Example:build"
           }
         },
         "test": {
@@ -109,5 +109,5 @@
       }
     }
   },
-  "defaultProject": "Design_Assignment_Koru"
+  "defaultProject": "Paginated_Grid_Example"
 }
