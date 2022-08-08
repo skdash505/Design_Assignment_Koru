@@ -46,13 +46,14 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/skdash505/paginated-grid-example.git"
+    "url": "git+https://github.com/skdash505/Paginated_Grid_Example"
   },
-  "keywords": [
+  "keywords": [    
+    "MEAN Stack",
     "angular",
-    "bootstrap",
     "angularMaterial",
-    "authentication",
-    "mean Stack"
+    "bootstrap",    
+    "PaginatedGrid",
+    "editableGrid"
   ]
 }

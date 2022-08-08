@@ -1,14 +1,3 @@
-@import "../../styles.scss";
-
-.mat-elevation-z8 {
-  @extend .mat-dialog-container-Data;
-}
-
-// mat-table {
-//   width: 100%;
-//   height: 100%;
-// }
-
 // Selcted row bold Start
 .mat-row .mat-cell {
   border-bottom: 1px solid transparent;
@@ -23,59 +12,60 @@
 .demo-row-is-clicked {
   font-weight: bold;
 }
+
 // Selcted row bold End
 
-// Variables Defined Start
-$pR: 2%;
-$pL: 3%;
-$minCellwidth: 5%;
-$maxCellwidth: 19%;
-$iconCellWidth: 10%;
-// $minBlankCellwidth: 3.2%;
-// $maxBlankCellwidth: 12%;
-// $iconBlankCellWidth: 6.4%;
-// Variables Defined End
+tr {
+  display: flex;
+  align-items: center;
+  // height: 10%;
 
-// conmmon classes defined Start
-.border {
-  @extend .centerAlign;
-  border-right: 1px solid currentColor;
-  padding-right: $pR;
-  width: $minCellwidth;
-}
-.contentCell {
-  width: $maxCellwidth;
-  word-break: break-all;
-  padding-left: $pL;
-  text-align: left;
-}
-// conmmon classes defined End
-
-// MatTable header defined Start
-.mat-header-row {
-  background-color: #315e91d6;
-  @extend .centerAlign;
-  .mat-header-cell {
-    font-size: 16px;
-    color: whitesmoke;
-    text-transform: uppercase;
+  th {
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+    
     font-weight: bold;
-    font-style: normal;
-    word-spacing: 0.1rem;
+    font-size: 16px;
+    // word-spacing: 0.1rem;
   }
-  // .cdk-column-selector.mat-column-selector {
-  //   width: $minBlankCellwidth;
-  // }
-  // .cdk-column-name.mat-column-name,
-  // .cdk-column-description.mat-column-description,
-  // .cdk-column-webReference.mat-column-webReference {
-  //   width: $maxBlankCellwidth;
-  // }
-  // .cdk-column-action.mat-column-action {
-  //   width: $iconBlankCellWidth;
-  // }
+  
+  td {
+    font-size: 16px;
+    align-items: left;
+    // word-spacing: 0.1rem;
+  }
 }
-// MatTable header defined End
+
+.cell_Prop {
+  border-right: 1px solid currentColor;
+  // width: 100%;
+  word-break: break-all;
+  padding-left: 2%;
+  padding-right: 2%;
+  // font-size: 18px;
+}
+
+.mat-column-groupNo {
+  @extend .cell_Prop;
+  width: 30%;
+}
+
+.mat-column-groupName {
+  @extend .cell_Prop;
+  width: 45%;
+}
+
+.mat-column-description {
+  @extend .cell_Prop;
+  width: 45%;
+}
+
+.mat-column-action {
+  @extend .cell_Prop;
+  width: 35%;
+}
 
 // Sorting symbol Start
 ::ng-deep .mat-sort-header-arrow {
@@ -83,80 +73,56 @@ $iconCellWidth: 10%;
   opacity: 1 !important;
   color: #3f3d2b;
 }
+
 // Sorting symbol End
 
 // icons defined Start
 .icoButtons {
-  i, .mat-icon {
-    margin-right: 10%;
-    font-size: 2em;
+
+  i,
+  .mat-icon {
+    margin: 5% 1% 1% 1%;
+    font-size: 1.25em;
   }
-  i:last-child , .mat-icon:last-child {
-    margin-right: 0;
-  }
+
+  // i:last-child,
+  // .mat-icon:last-child {
+  //   margin-right: 0;
+  // }
 }
+
 // icons defined End
-
-// Columns defined Start
-.mat-column-selector {
-  @extend .border;
-  @extend .noPadding;
-  overflow: initial;
-}
-
-.mat-column-id {
-  @extend .border;
-  @extend .noPadding;
-}
-
-.mat-column-name {
-  @extend .border;
-  @extend .contentCell;
-  // font-size: 18px;
-}
-
-.mat-column-description {
-  @extend .border;
-  @extend .contentCell;
-  font-style: italic;
-}
-
-.mat-column-webReference {
-  @extend .border;
-  @extend .contentCell;
-  // text-align: center;
-  font-weight: bold;
-}
-
-.mat-column-action {
-  @extend .centerAlign;
-  @extend .noPadding;
-  width: $iconCellWidth;
-}
-// Columns defined End
 
 // Filter Box Start
 mat-form-field.filterBox {
   display: flex;
   justify-content: right;
   padding-right: 2%;
+
   mat-icon {
     width: 1.7rem;
     height: 1.7rem;
     font-size: 1.7rem;
   }
+
   div {
     width: 100px;
   }
+
   input {
     padding-left: 20px;
   }
 }
+
 // Filter Box End
 
 // No Data Message Start
 .mat-no-data-row td {
-  @extend .centerAlign;
   color: rgb(194, 20, 20);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  vertical-align: middle;
 }
+
 // No Data Message End
