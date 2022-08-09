@@ -1,4 +1,15 @@
 // Selcted row bold Start
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    height: 2.75rem;
+  }
+}
+
 .mat-row .mat-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
@@ -25,12 +36,12 @@ tr {
     text-align: center;
     vertical-align: middle;
     align-items: center;
-    
+
     font-weight: bold;
     font-size: 16px;
     // word-spacing: 0.1rem;
   }
-  
+
   td {
     font-size: 16px;
     align-items: left;

@@ -113,4 +113,9 @@ export class DialogContentComponent implements OnInit, AfterViewInit {
     }
     this.updatePaginationDataList(this.groupList);
   }
+
+  openSelectedGroup(event:any, ){
+    console
+
+  }
 }

@@ -1,11 +1,16 @@
 <mat-card class="mat-elevation-z8">
-  <mat-form-field appearance="standard" class="filterBox">
-    <input matInput [(ngModel)]="filterValue" (keyup)="applyFilter($event)" placeholder="Filter Data" #input />
-    <mat-icon *ngIf="!input.value" matSuffix>search</mat-icon>
-    <button mat-button *ngIf="input.value" matSuffix mat-icon-button (click)="clearFilter($event)">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
+  <div class="row">
+    <button mat-raised-button class="boxed_btn" color="primary" (click)="openSelectedGroup($event)">Create
+      Group</button>
+    <mat-form-field appearance="standard" class="filterBox">
+      <input matInput [(ngModel)]="filterValue" (keyup)="applyFilter($event)" placeholder="Filter Data" #input />
+      <mat-icon *ngIf="!input.value" matSuffix>search</mat-icon>
+      <button mat-button *ngIf="input.value" matSuffix mat-icon-button (click)="clearFilter($event)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+  </div>
 
   <mat-table table [dataSource]="groupListPaginated" matSort (matSortChange)="announceSortChange($event)">
 
