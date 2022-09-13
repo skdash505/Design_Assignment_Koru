@@ -1,114 +1,41 @@
-// Selcted row bold Start
+@import "../../styles.scss";
 
+.mat-elevation-z8 {
+  @extend .centerAlign;
+  margin: 6% 4%;
+  padding: 2%;
+  border-radius: 2rem;
+}
+
+// Button and Filter Row Start
 .row {
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   align-items: center;
 
   button {
+    margin-right: 8%;
     height: 2.75rem;
   }
 }
 
-.mat-row .mat-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  cursor: pointer;
+// Button and Filter Row End
+body > app-root > app-dialog-content > mat-card > div > mat-form-field > div > div.mat-form-field-underline.ng-tns-c47-0.ng-star-inserted{
+  height: 1px !important
+
 }
-
-.mat-row:hover .mat-cell {
-  border-color: currentColor;
-}
-
-.demo-row-is-clicked {
-  font-weight: bold;
-}
-
-// Selcted row bold End
-
-tr {
-  display: flex;
-  align-items: center;
-  // height: 10%;
-
-  th {
-    justify-content: center;
-    text-align: center;
-    vertical-align: middle;
-    align-items: center;
-
-    font-weight: bold;
-    font-size: 16px;
-    // word-spacing: 0.1rem;
-  }
-
-  td {
-    font-size: 16px;
-    align-items: left;
-    // word-spacing: 0.1rem;
-  }
-}
-
-.cell_Prop {
-  border-right: 1px solid currentColor;
-  // width: 100%;
-  word-break: break-all;
-  padding-left: 2%;
-  padding-right: 2%;
-  // font-size: 18px;
-}
-
-.mat-column-groupNo {
-  @extend .cell_Prop;
-  width: 30%;
-}
-
-.mat-column-groupName {
-  @extend .cell_Prop;
-  width: 45%;
-}
-
-.mat-column-description {
-  @extend .cell_Prop;
-  width: 45%;
-}
-
-.mat-column-action {
-  @extend .cell_Prop;
-  width: 35%;
-}
-
-// Sorting symbol Start
-::ng-deep .mat-sort-header-arrow {
-  transform: none !important;
-  opacity: 1 !important;
-  color: #3f3d2b;
-}
-
-// Sorting symbol End
-
-// icons defined Start
-.icoButtons {
-
-  i,
-  .mat-icon {
-    margin: 5% 1% 1% 1%;
-    font-size: 1.25em;
-  }
-
-  // i:last-child,
-  // .mat-icon:last-child {
-  //   margin-right: 0;
-  // }
-}
-
-// icons defined End
-
 // Filter Box Start
 mat-form-field.filterBox {
   display: flex;
   justify-content: right;
   padding-right: 2%;
+
+  div {
+    
+    div.mat-form-field-underline{
+      height: 1px !important
+    }
+  }
 
   mat-icon {
     width: 1.7rem;
@@ -127,6 +54,121 @@ mat-form-field.filterBox {
 
 // Filter Box End
 
+// Selcted row bold Start
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  font-weight: bold;
+  // border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+// Selcted row bold End
+
+// Sorting symbol Start
+::ng-deep .mat-sort-header-arrow {
+  transform: none !important;
+  opacity: 1 !important;
+  color: #3f3d2b;
+}
+
+// Sorting symbol End
+
+
+// Table Properties Start
+tr {
+  display: flex;
+  align-items: center;
+  height: 10%;
+
+  th {
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+
+    font-weight: bold;
+    font-size: 16px;
+    // word-spacing: 0.1rem;
+  }
+
+  td {
+    font-size: 16px;
+    text-align: left;
+    // word-spacing: 0.1rem;
+  }
+}
+
+// Table Properties End
+
+// Cell Properties Start
+.cell_Prop {
+  // border-right: 1px solid currentColor;
+  // width: 100%;
+  // word-break: break-all;
+  padding-left: 1%;
+  padding-right: 2%;
+  // font-size: 18px;
+}
+
+// Cell Properties End
+
+// Group No. Column Properties Start
+.mat-column-groupNo {
+  @extend .cell_Prop;
+  width: 10%;
+}
+
+// Group No. Column Properties End
+
+// Group Name Column Properties Start
+.mat-column-groupName {
+  @extend .cell_Prop;
+  width: 45%;
+}
+
+// Group Name Column Properties End
+
+// Description Column Properties Start
+.mat-column-description {
+  @extend .cell_Prop;
+  width: 45%;
+}
+
+// Description Column Properties End
+
+
+// Action Column Properties Start
+.mat-column-action {
+  @extend .cell_Prop;
+  text-align: center !important;
+  width: 8%;
+
+  // icons defined Start
+  i,
+  .mat-icon {
+    // margin: 1% 3% 1% 3%;
+    font-size: 1.5rem;
+  }
+
+  // i:last-child,
+  // .mat-icon:last-child {
+  //   margin-right: 0;
+  // }
+
+  // icons defined End
+}
+
+// Action Column Properties End
+
+
 // No Data Message Start
 .mat-no-data-row td {
   color: rgb(194, 20, 20);
@@ -137,3 +179,15 @@ mat-form-field.filterBox {
 }
 
 // No Data Message End
+
+// Paginator Start
+mat-paginator .mat-paginator-container {
+  font-size: 14px;
+}
+
+// Paginator End
+
+
+th.mat-header-cell{
+  // padding-bottom: 5%;
+}

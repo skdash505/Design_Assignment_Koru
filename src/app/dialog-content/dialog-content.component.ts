@@ -29,7 +29,11 @@ export class DialogContentComponent implements OnInit, AfterViewInit {
   constructor(private _liveAnnouncer: LiveAnnouncer) {}
 
   ngOnInit(): void {
-    let DemoData = [
+    let DemoData:{
+      groupNo: Number,
+      groupName: string,
+      description: string,
+    }[] = [
       {
         groupNo: 1,
         groupName: 'shgij',
@@ -59,6 +63,7 @@ export class DialogContentComponent implements OnInit, AfterViewInit {
 
   // Updateing the GidData as per Soring
   announceSortChange(sortState: Sort) {
+    console.log(sortState);
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
