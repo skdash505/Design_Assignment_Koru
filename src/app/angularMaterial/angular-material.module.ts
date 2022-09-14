@@ -39,7 +39,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 
+import {MatNativeDateModule} from '@angular/material/core';
+
+
 const materialModules = [
+  MatDatepickerModule
+,MatNativeDateModule,MatInputModule,
   CdkTreeModule,
   LayoutModule,
   MatAutocompleteModule,
