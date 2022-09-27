@@ -16,12 +16,14 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { AppComponent } from './app.component';
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
 import { DataFormComponent } from './data-form/data-form.component';
+import { CeateDateScheduleComponent } from './ceate-date-schedule/ceate-date-schedule.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogContentComponent,
-    DataFormComponent
+    DataFormComponent,
+    CeateDateScheduleComponent
   ],
   imports: [
     BrowserModule,

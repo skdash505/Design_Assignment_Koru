@@ -1,0 +1,63 @@
+//@import "../../icg-group/icg-group.component.scss";
+
+span.back-btn {
+    float: left;
+    color: #fff;
+    cursor: pointer;
+  
+    :hover {
+      text-decoration: underline;
+    }
+  }
+  
+  .mat-elevation-z8 {
+  
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+    margin: 6% 4%;
+    padding: 2%;
+    border-radius: 2rem;
+  }
+  
+  .content {
+    height: auto;
+    border-radius: 10px;
+    // margin: 1rem 1rem 2rem 2rem;
+    // box-sizing: initial;
+  
+    font-size: 1rem;
+    color: black;
+  }
+  mat-label {
+    display: block !important;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: black !important;
+    font-weight: bold;
+  }
+  .col-md-4 {
+    text-align: left;
+  }
+  
+  .col-md-3 {
+    text-align: left;
+  }
+  // .row {
+  //   display: flex;
+  
+  //   margin: 1.5rem 0;
+  // }
+  
+  .action-btn{
+    button{
+        margin: 1.5rem 0rem
+    }
+  }
+  .hidden{
+    display: none;
+    // visibility: hidden;
+  }
+  
+  

@@ -2,8 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
+import { FormControl, Validators } from '@angular/forms';
+
 import { DataJsonElement } from './shared/DataJsonElements';
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
+
+import { combineLatest, map } from 'rxjs';
+import { AppService } from './app.service';
+
+interface timeList {
+  value: number;
+  viewValue: string;
+  disabled?: boolean;
+}
 
 @Component({
   selector: 'app-root',
@@ -15,7 +26,11 @@ export class AppComponent implements OnInit {
   buttonTitle: string = 'Show Data';
   dataList!: DataJsonElement[];
 
-  constructor(public dialog: MatDialog, private httpClient: HttpClient) {
+  constructor(
+    public dialog: MatDialog,
+    private httpClient: HttpClient,
+    private appService: AppService
+  ) {
     this.createStartTimeList();
   }
 
@@ -28,6 +43,15 @@ export class AppComponent implements OnInit {
         this.dataList = data.data;
       });
   }
+
+  a = new FormControl(
+    { value: this.meetingStatusDetail.group_id, disabled: true },
+    [
+      Validators.required,
+      Validators.pattern(/^[0-9]\d*$/),
+      Validators.maxLength(3),
+    ]
+  );
 
   // on Show Data button Click
   async openDialog() {
@@ -109,26 +133,53 @@ export class AppComponent implements OnInit {
   }
 
   onStartTimeChange(event: any) {
-    debugger
+    debugger;
     console.log(this.start_time.value);
-    let start_time_ViewValue : string = this.start_time.value;
-    let start_time_Value! : number;
-    this.start_time_List.forEach(element => {
-      if(element.viewValue == start_time_ViewValue){
-        start_time_Value = element.value
-      }      
+    let start_time_ViewValue: string = this.start_time.value;
+    let start_time_Value!: number;
+    this.start_time_List.forEach((element) => {
+      if (element.viewValue == start_time_ViewValue) {
+        start_time_Value = element.value;
+      }
     });
-    this.creatEndTimeList(start_time_Value)
+    this.creatEndTimeList(start_time_Value);
     console.log(start_time_Value);
   }
   onEndTimeChange(event: any) {
     console.log(this.start_time.value);
   }
-}
-import { FormControl } from '@angular/forms';
 
-interface timeList {
-  value: number;
-  viewValue: string;
-  disabled?: boolean;
+  users: any[] = [];
+
+  parallelApiCall() {
+    this.appService.getSchedules().subscribe((schedules) => {
+      this.appService.getGroups().subscribe((groups) => {
+        let result: any[] = [];
+        schedules.map((schedule: any) => {
+          debugger;
+          //@ts-ignore
+          let groupNo = groups.find(
+            (group: any) => group.groupid === schedule.groupid
+            //@ts-ignore
+          ).groupid;
+          result.push({
+            ...schedule,
+            groupNo,
+          });
+        });
+      });
+    });
+  }
+
+  formatDate(date: Date) {
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
 }
