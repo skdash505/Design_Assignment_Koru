@@ -1,5 +1,5 @@
 {
-  "name": "paginated-grid-example",
+  "name": "paginated_grid",
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
@@ -46,7 +46,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/skdash505/Paginated_Grid_Example"
+    "url": "git+https://github.com/skdash505/paginated_grid.git"
   },
   "keywords": [    
     "MEAN Stack",
