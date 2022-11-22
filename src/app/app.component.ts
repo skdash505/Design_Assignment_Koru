@@ -45,7 +45,8 @@ export class AppComponent implements OnInit {
   }
 
   a = new FormControl(
-    { value: this.meetingStatusDetail.group_id, disabled: true },
+    // { value: this.meetingStatusDetail.group_id, disabled: true },
+    undefined,
     [
       Validators.required,
       Validators.pattern(/^[0-9]\d*$/),

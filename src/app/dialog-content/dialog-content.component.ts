@@ -1,10 +1,21 @@
-import { AfterViewInit, Component, ViewChild, OnInit, Inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ViewChild,
+  OnInit,
+  Inject,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogConfig,
+} from '@angular/material/dialog';
 
 import { DataFormComponent } from '../data-form/data-form.component';
 import { DataJsonElement } from '../shared/DataJsonElements';
@@ -12,15 +23,19 @@ import { DataJsonElement } from '../shared/DataJsonElements';
 @Component({
   selector: 'app-dialog-content',
   templateUrl: './dialog-content.component.html',
-  styleUrls: ['./dialog-content.component.scss']
+  styleUrls: ['./dialog-content.component.scss'],
 })
 export class DialogContentComponent implements OnInit, AfterViewInit {
-
   // Basic Table
-  displayedColumns: string[] = ['selector', 'name', 'description', 'webReference', 'action'];
+  displayedColumns: string[] = [
+    'selector',
+    'name',
+    'description',
+    'webReference',
+    'action',
+  ];
   dataListPaginated!: MatTableDataSource<DataJsonElement>;
   dataList!: DataJsonElement[];
-
 
   constructor(
     public dialog: MatDialog,
@@ -32,13 +47,32 @@ export class DialogContentComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.consoleAllData("ngOnInit");
+    this.consoleAllData('ngOnInit');
+    this.dataListPaginated.filterPredicate = this.filterByName();
+  }
+  filterByName() {
+    let filterFunction = (data: DataJsonElement, filter: string): boolean => {
+      if (filter) {
+        debugger
+        console.log(data);
+        console.log(data.name);
+        console.log(data.name.toLowerCase().includes(filter));
+        // if (data.name.indexOf(filter) != -1) {
+          if (data.name.toLowerCase().includes(filter)) {
+          return true;
+        }
+        return false;
+      } else {
+        return true;
+      }
+    };
+    return filterFunction;
   }
 
   ngAfterViewInit() {
     this.dataListPaginated.sort = this.sort;
     this.dataListPaginated.paginator = this.paginator;
-    this.consoleAllData("ngAfterViewInit");
+    this.consoleAllData('ngAfterViewInit');
   }
 
   // pagination Related
@@ -62,59 +96,62 @@ export class DialogContentComponent implements OnInit, AfterViewInit {
   filterValue!: string;
   applyFilter(event: any) {
     // const filterValue = (event.target as HTMLInputElement).value;
+
     this.dataListPaginated.filter = this.filterValue.trim().toLowerCase();
-    this.consoleAllData("applyFilter")
+    console.log(this.dataListPaginated);
+    this.consoleAllData('applyFilter');
   }
   clearFilter(event: any) {
-    this.filterValue = "";
+    this.filterValue = '';
     this.applyFilter(event);
   }
 
   // Set Data to DataList from Parent Screen
   setDataList(data: DataJsonElement[]) {
     this.dataList = [...data];
-    this.dataList.forEach(element => {
+    this.dataList.forEach((element) => {
       element.selector = false;
       if (!Boolean(element.id)) {
-        element.id = Math.random().toString(36).substring(2) +
-          (new Date()).getTime().toString(36);
+        element.id =
+          Math.random().toString(36).substring(2) +
+          new Date().getTime().toString(36);
       }
     });
     this.updatePaginationDataList(this.dataList);
-    this.consoleAllData("setDataList");
+    this.consoleAllData('setDataList');
   }
 
-  // Set Updated Data to Paginated DataList 
+  // Set Updated Data to Paginated DataList
   updatePaginationDataList(updatedDataList: DataJsonElement[]) {
-    this.dataListPaginated = new MatTableDataSource<DataJsonElement>([...updatedDataList]);
+    this.dataListPaginated = new MatTableDataSource<DataJsonElement>([
+      ...updatedDataList,
+    ]);
     this.dataListPaginated.paginator = this.paginator;
     this.dataListPaginated.sort = this.sort;
   }
 
   consoleAllData(From: string) {
-    console.log("Start by : ", From);
-    console.log("selectAllRow : ", this.selectAllRow);
-    console.log("clickedRows : ", this.clickedRows);
-    console.log("dataList : ", this.dataList);
-    console.log("dataListPaginated : ", this.dataListPaginated);
-    console.log("paginator : ", this.paginator);
-    console.log("sort : ", this.sort);
-    console.log("filterValue : ", this.filterValue);
-    console.log("End >>>>");
+    console.log('Start by : ', From);
+    console.log('selectAllRow : ', this.selectAllRow);
+    console.log('clickedRows : ', this.clickedRows);
+    console.log('dataList : ', this.dataList);
+    console.log('dataListPaginated : ', this.dataListPaginated);
+    console.log('paginator : ', this.paginator);
+    console.log('sort : ', this.sort);
+    console.log('filterValue : ', this.filterValue);
+    console.log('End >>>>');
   }
-
-
 
   // Add new Row
   async addRow(event: any) {
     await this.openFormDialog(true);
-    this.consoleAllData("addRow");
+    this.consoleAllData('addRow');
   }
 
   // Edit row details
   async editRow(event: any, row: DataJsonElement) {
     await this.openFormDialog(false, row);
-    this.consoleAllData("editRow");
+    this.consoleAllData('editRow');
   }
 
   async openFormDialog(buttonShow: boolean, rowData?: DataJsonElement) {
@@ -123,21 +160,21 @@ export class DialogContentComponent implements OnInit, AfterViewInit {
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
       rowData: rowData,
-      buttonShow: buttonShow
+      buttonShow: buttonShow,
     };
 
     // open MatDialogBox
     const dialogRef = await this.dialog.open(DataFormComponent, dialogConfig);
 
     // after MatDialogBox closed
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("Dialog result: ", result);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Dialog result: ', result);
 
       if (Boolean(result) && Boolean(result!.data!.data)) {
         this.dataList.push(result.data.data);
         this.setDataList(this.dataList);
       }
-      this.consoleAllData("addRow");
+      this.consoleAllData('addRow');
     });
 
     // // after MatDialogBox closed
@@ -165,28 +202,26 @@ export class DialogContentComponent implements OnInit, AfterViewInit {
   // on click on select all checkbox
   onSelectAll(event: any) {
     this.selectAllRow = !this.selectAllRow;
-    this.dataList.map(value => value.selector = this.selectAllRow);
-    this.consoleAllData("onSelectAll");
+    this.dataList.map((value) => (value.selector = this.selectAllRow));
+    this.consoleAllData('onSelectAll');
   }
 
   // On click on individual checkbox
   onSelecter(event: any, row: DataJsonElement) {
     row.selector = !row.selector;
-    this.dataList.forEach(index => {
+    this.dataList.forEach((index) => {
       if (index.id == row.id) {
         index.selector = row.selector;
       }
     });
     this.selectAllRow = false;
-    this.consoleAllData("onSelecter");
+    this.consoleAllData('onSelecter');
   }
 
   /////// Custom Selector End /////
 
-
   // Delete Selected Rows
   deleteSelectedRow(event: any) {
-
     let indexList = [];
     for (let index = 0; index < this.dataList.length; index++) {
       if (this.dataList[index].selector) {
@@ -197,7 +232,7 @@ export class DialogContentComponent implements OnInit, AfterViewInit {
     if (Boolean(indexList.length)) {
       if (!this.selectAllRow) {
         indexList.reverse();
-        indexList.forEach(index => {
+        indexList.forEach((index) => {
           this.dataList.splice(index, 1);
         });
       } else {
@@ -205,10 +240,10 @@ export class DialogContentComponent implements OnInit, AfterViewInit {
       }
       this.updatePaginationDataList(this.dataList);
     } else {
-      console.warn("no row selected");
+      console.warn('no row selected');
     }
 
-    this.consoleAllData("deleteSelectedRow");
+    this.consoleAllData('deleteSelectedRow');
     if (!Boolean(this.dataList.length)) {
       this.dialogRef.close();
     }
@@ -224,11 +259,9 @@ export class DialogContentComponent implements OnInit, AfterViewInit {
     }
     this.updatePaginationDataList(this.dataList);
 
-    this.consoleAllData("deleteRow");
+    this.consoleAllData('deleteRow');
     if (!Boolean(this.dataList.length)) {
       this.dialogRef.close();
     }
   }
-
-
 }
